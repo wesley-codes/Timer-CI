@@ -1,0 +1,26 @@
+---
+name: CI-Timer-App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: Set Short SHA
+        run: |
+          echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
+      - name: Build Docker Image
+        run: |
+          docker build -t meka124/TimerApp:${{env.SHORT_SHA}} .
+      - name: Login to docker
+        run: |
+          echo "${{secrets.GITHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}" --password-stdin
+      - name: Push to Dockerhub
+        run: |
+          docker push meka124/TimerApp:${{ env.SHORT_SHA }}
