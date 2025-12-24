@@ -20,7 +20,7 @@ jobs:
           docker build -t meka124/timerapp:${{env.SHORT_SHA}} .
       - name: Login to docker
         run: |
-          echo "${{secrets.GITHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}" --password-stdin
+          echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}" --password-stdin
       - name: Push to Dockerhub
         run: |
           docker push meka124/timerapp:${{ env.SHORT_SHA }}
