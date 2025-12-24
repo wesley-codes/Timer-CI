@@ -1,6 +1,6 @@
 image:  
   repository: meka124/timerapp
-  tag: 8a49aa8
+  tag: 85b13da
   pullPolicy: IfNotPresent
 
 service:
