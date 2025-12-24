@@ -24,3 +24,15 @@ jobs:
       - name: Push to Dockerhub
         run: |
           docker push meka124/timerapp:${{ env.SHORT_SHA }}
+      - name: Configure git Author
+        run: |
+            git config --local user.email "ezemikey12@gmail.com"
+            git config --local user.name "wesley-codes"
+      - name: Update Helm Chart with new image tag
+        run: |
+            sed -i "s/tag:.*/tag: ${{env.SHORT_SHA}}/" ./timerapp/values.yaml
+            git add ./timerapp/values.yaml
+            git commit -m "Updated image tag to ${{env.SHORT_SHA}}"
+            git push 
+
+
