@@ -17,10 +17,10 @@ jobs:
           echo "SHORT_SHA=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_ENV
       - name: Build Docker Image
         run: |
-          docker build -t meka124/timerApp:${{env.SHORT_SHA}} .
+          docker build -t meka124/timerapp:${{env.SHORT_SHA}} .
       - name: Login to docker
         run: |
           echo "${{secrets.GITHUB_TOKEN}}" | docker login -u "${{secrets.DOCKERHUB_USERNAME}}" --password-stdin
       - name: Push to Dockerhub
         run: |
-          docker push meka124/timerApp:${{ env.SHORT_SHA }}
+          docker push meka124/timerapp:${{ env.SHORT_SHA }}
