@@ -10,10 +10,9 @@ spec:
     targetRevision: HEAD
     path: timerapp
   destination:
-    server: "https://.default.svc"
-    namespace: default 
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-
